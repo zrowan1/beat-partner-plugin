@@ -1,0 +1,49 @@
+[package]
+name = "beat-partner-plugin"
+version = "0.1.0"
+edition = "2021"
+authors = ["BeatPartner Team"]
+license = "MIT"
+description = "A VST3/AU/CLAP plugin companion for music producers"
+
+[workspace]
+members = ["."]
+
+[dependencies]
+nih_plug = { git = "https://github.com/robbert-vdh/nih-plug.git", features = ["assert_process_allocs"] }
+nih_plug_egui = { git = "https://github.com/robbert-vdh/nih-plug.git" }
+egui = "0.31"
+
+# Database
+rusqlite = { version = "0.30", features = ["bundled"] }
+rusqlite_migration = { version = "1.1" }
+
+# Serialization
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+
+# Error handling
+thiserror = "1.0"
+
+# Concurrency & real-time
+crossbeam = "0.8"
+atomic_float = "0.1"
+
+# Logging
+log = "0.4"
+fern = "0.6"
+
+# FFT
+realfft = "3.3"
+rustfft = "6.2"
+
+# Utilities
+dirs = "5.0"
+
+[lib]
+crate-type = ["cdylib", "lib"]
+
+[profile.release]
+lto = "thin"
+strip = true
+opt-level = 3
